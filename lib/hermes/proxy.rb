@@ -1,6 +1,8 @@
 module Hermes
   class Proxy
 
+    attr_reader :address, :port, :type
+
     # @params address String
     # @params port Integer
     # @params type String ['http', 'socks5']
