@@ -19,4 +19,10 @@ describe Hermes::Agent do
     end
   end
 
+  context "for Phantom agent" do
+    it "should be return Phantom class" do
+      @agent.phantom.class.should eq(Hermes::Agents::Phantom)
+    end
+  end
+
 end

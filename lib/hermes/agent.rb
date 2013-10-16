@@ -1,6 +1,7 @@
 require 'hermes/proxy'
 require 'hermes/agents/http'
 require 'hermes/agents/mechanize'
+require 'hermes/agents/phantom'
 
 module Hermes
   class Agent
@@ -13,12 +14,16 @@ module Hermes
       @proxy = Hermes::Proxy.new(address: '127.0.0.1', port: 9050, type: 'socks5')
     end
 
+    def phantom
+      return Hermes::Agents::Phantom.new(proxy: @proxy)
+    end
+
     def mechanize
       return Hermes::Agents::Mechanize.new(proxy: @proxy)
     end
 
     def http
-      return @http ||= Hermes::Agents::Http.new(proxy: @proxy)
+      return Hermes::Agents::Http.new(proxy: @proxy)
     end
 
   end
