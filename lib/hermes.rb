@@ -1,5 +1,6 @@
 require "hermes/version"
 
+require "hermes/agent"
+
 module Hermes
-  # Your code goes here...
 end
