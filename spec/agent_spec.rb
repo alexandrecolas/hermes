@@ -13,4 +13,10 @@ describe Hermes::Agent do
     end
   end
 
+  context "for Mechanize agent" do
+    it "should be return Mechanize class" do
+      @agent.mechanize.class.should eq(Hermes::Agents::Mechanize)
+    end
+  end
+
 end
