@@ -4,11 +4,13 @@ require 'mechanize'
 
 module Hermes
   module Agents
-    class Mechanize
+    class Mecha
 
       def initialize(proxy: false)
         @proxy = proxy
+      end
 
+      def mechanize
         unless @proxy == false
           if @proxy.type == 'socks5'
             TCPSocket::socks_server = @proxy.address
@@ -22,7 +24,6 @@ module Hermes
         else
           return ::Mechanize.new
         end
-
       end
 
     end

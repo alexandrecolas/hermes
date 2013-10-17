@@ -23,4 +23,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-nav"
+
+  spec.add_runtime_dependency "mechanize"
+  spec.add_runtime_dependency "socksify"
+  spec.add_runtime_dependency "capybara"
+  spec.add_runtime_dependency "poltergeist"
 end

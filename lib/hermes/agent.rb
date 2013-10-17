@@ -11,7 +11,7 @@ module Hermes
     end
 
     def set_proxy(address: '127.0.0.1', port: 9050, type: 'socks5')
-      @proxy = Hermes::Proxy.new(address: '127.0.0.1', port: 9050, type: 'socks5')
+      @proxy = Hermes::Proxy.new(address: address, port: port, type: type)
     end
 
     def phantom
@@ -19,7 +19,8 @@ module Hermes
     end
 
     def mechanize
-      return Hermes::Agents::Mechanize.new(proxy: @proxy)
+      mecha = Hermes::Agents::Mecha.new(proxy: @proxy)
+      return mecha.mechanize
     end
 
     def http
