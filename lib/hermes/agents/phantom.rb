@@ -11,6 +11,7 @@ module Hermes
         if proxy
           options[:phantomjs_options] = ["--proxy-type=#{proxy.type}",
             "--proxy=#{proxy.address}:#{proxy.port}"]
+          options[:js_errors] = false
         end
 
         Capybara.configure do |config|
@@ -22,7 +23,9 @@ module Hermes
         Capybara.register_driver :poltergeist do |app|
           Capybara::Poltergeist::Driver.new(app, options)
         end
+      end
 
+      def session
         @session = Capybara::Session.new(:poltergeist)
         @session.driver.headers = { 'User-Agent' => "Mozilla/5.0 (Macintosh; Intel Mac OS X)" }
 

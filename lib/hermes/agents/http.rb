@@ -32,6 +32,19 @@ module Hermes
         end
       end
 
+      def post url, params=nil
+        uri = URI.parse(url)
+        begin
+          return @net.start(uri.host, 80) do |http|
+            request = Net::HTTP::Post.new(uri.path)
+            request.set_form_data(params)
+            http.request(request)
+          end
+        rescue StandardError => e
+          return false
+        end
+      end
+
     end
   end
 end
