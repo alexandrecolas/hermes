@@ -15,16 +15,15 @@ module Hermes
     end
 
     def phantom
-      return Hermes::Agents::Phantom.new(proxy: @proxy)
+      return @agent_phantom ||= Hermes::Agents::Phantom.new(proxy: @proxy)
     end
 
     def mechanize
-      mecha = Hermes::Agents::Mecha.new(proxy: @proxy)
-      return mecha.mechanize
+      return @agent_mechanize ||= (Hermes::Agents::Mecha.new(proxy: @proxy)).mechanize
     end
 
     def http
-      return Hermes::Agents::Http.new(proxy: @proxy)
+      return @agent_http ||= Hermes::Agents::Http.new(proxy: @proxy)
     end
 
   end
