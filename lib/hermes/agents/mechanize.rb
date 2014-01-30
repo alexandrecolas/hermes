@@ -6,8 +6,9 @@ module Hermes
   module Agents
     class Mecha
 
-      def initialize(proxy: false)
+      def initialize(proxy: false, user_agent: "Windows Firefox")
         @proxy = proxy
+        @user_agent_alias = user_agent
       end
 
       def mechanize
@@ -15,15 +16,18 @@ module Hermes
           if @proxy.type == 'socks5'
             TCPSocket::socks_server = @proxy.address
             TCPSocket::socks_port = @proxy.port
-            return ::Mechanize.new
+            agent = ::Mechanize.new
           else
             agent = ::Mechanize.new
             agent.set_proxy @proxy.address, @proxy.port
-            return agent
           end
         else
-          return ::Mechanize.new
+          agent = ::Mechanize.new
         end
+
+        agent.user_agent_alias = @user_agent_alias
+
+        return agent
       end
 
     end

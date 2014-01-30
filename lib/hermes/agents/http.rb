@@ -5,7 +5,9 @@ module Hermes
   module Agents
     class Http
 
-      def initialize(proxy: false)
+      def initialize(proxy: false, user_agent: "Windows Firefox")
+        @user_agent_alias = user_agent
+
         @proxy = proxy
         @net = Net::HTTP
 
@@ -20,7 +22,7 @@ module Hermes
 
       end
 
-      def get url, headers= nil
+      def get url, headers: nil
         uri = URI.parse(url)
         begin
           return @net.start(uri.host, 80) do |http|
@@ -32,12 +34,13 @@ module Hermes
         end
       end
 
-      def post url, params=nil
+      def post url, params: nil, headers: nil
         uri = URI.parse(url)
         begin
           return @net.start(uri.host, 80) do |http|
-            request = Net::HTTP::Post.new(uri.path)
+            request = Net::HTTP::Post.new(uri.path, headers)
             request.set_form_data(params)
+
             http.request(request)
           end
         rescue StandardError => e
