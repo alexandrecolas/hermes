@@ -6,7 +6,7 @@ module Hermes
   module Agents
     class Mecha
 
-      def initialize(proxy: false, user_agent: "Windows Firefox")
+      def initialize(proxy: false, user_agent: "Mac Safari")
         @proxy = proxy
         @user_agent_alias = user_agent
       end

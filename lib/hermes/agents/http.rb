@@ -22,19 +22,21 @@ module Hermes
 
       end
 
-      def get url, headers: nil
+      def get(url, headers: {})
+        headers['User-Agent'] ||= AGENT_ALIASES[@user_agent_alias]
+
         uri = URI.parse(url)
         begin
           return @net.start(uri.host, 80) do |http|
             http.read_timeout = 480
-            headers ? http.get(uri.path, headers) : http.get(uri.path)
+            http.get(uri.path, headers)
           end
         rescue StandardError => e
           return false
         end
       end
 
-      def post url, params: nil, headers: nil
+      def post(url, params: {}, headers: {})
         uri = URI.parse(url)
         begin
           return @net.start(uri.host, 80) do |http|
