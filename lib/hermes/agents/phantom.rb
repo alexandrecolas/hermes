@@ -7,12 +7,20 @@ module Hermes
 
       def initialize(proxy: false, user_agent: "Windows Firefox")
         @user_agent_alias = user_agent
+        @path = Dir.pwd
+
         options = { timeout: 120, :cookies => true }
 
         if proxy
-          options[:phantomjs_options] = ["--proxy-type=#{proxy.type}",
-            "--proxy=#{proxy.address}:#{proxy.port}"]
+          options[:phantomjs_options] = [
+            "--proxy-type=#{proxy.type}",
+            "--proxy=#{proxy.address}:#{proxy.port}",
+            "--load-images=no",
+            "--ignore-ssl-errors=yes"
+          ]
           options[:js_errors] = false
+          options[:logger] = nil
+          options[:phantomjs_logger] = File.open("#{@path}/log/phantomjs.log", "w")
         end
 
         Capybara.configure do |config|
