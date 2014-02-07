@@ -5,9 +5,7 @@ module Hermes
   module Agents
     class Http
 
-      def initialize(proxy: false, user_agent: "Windows Firefox")
-        @user_agent_alias = user_agent
-
+      def initialize(proxy: false)
         @proxy = proxy
         @net = Net::HTTP
 
@@ -23,7 +21,7 @@ module Hermes
       end
 
       def get(url, headers: {})
-        headers['User-Agent'] ||= AGENT_ALIASES[@user_agent_alias]
+        headers['User-Agent'] ||= Hermes::UserAgents.get
 
         uri = URI.parse(url)
         begin

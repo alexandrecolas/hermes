@@ -5,8 +5,7 @@ module Hermes
     class Phantom
       include Capybara::DSL
 
-      def initialize(proxy: false, user_agent: "Windows Firefox")
-        @user_agent_alias = user_agent
+      def initialize(proxy: false)
         @path = Dir.pwd
 
         options = { timeout: 120, :cookies => true }
@@ -36,7 +35,7 @@ module Hermes
 
       def session
         @session = Capybara::Session.new(:poltergeist)
-        @session.driver.headers = { 'User-Agent' => AGENT_ALIASES[@user_agent_alias] }
+        @session.driver.headers = { 'User-Agent' => Hermes::UserAgents.get }
 
         return @session
       end

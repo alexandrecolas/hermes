@@ -6,9 +6,8 @@ module Hermes
   module Agents
     class Mecha
 
-      def initialize(proxy: false, user_agent: "Mac Safari")
+      def initialize(proxy: false)
         @proxy = proxy
-        @user_agent_alias = user_agent
       end
 
       def mechanize
@@ -25,7 +24,7 @@ module Hermes
           agent = ::Mechanize.new
         end
 
-        agent.user_agent_alias = @user_agent_alias
+        agent.user_agent_alias = Hermes::UserAgents.get_mechanize
 
         return agent
       end
