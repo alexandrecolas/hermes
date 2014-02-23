@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Hermes::VERSION
   spec.authors       = ["Alexandre Colas"]
   spec.email         = ["colasalexandre@gmail.com"]
-  spec.description   = %q{Generic Web Crawler}
-  spec.summary       = %q{Generic Web Crawler}
-  spec.homepage      = ""
+  spec.description   = "Generic Web Crawler"
+  spec.summary       = "Generic Web Crawler"
+  spec.homepage      = "https://github.com/alexandrecolas/hermes"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
