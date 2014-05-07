@@ -2,16 +2,15 @@ require 'yaml'
 
 module Hermes
   class UserAgents
-    BROWSERS = YAML.load_file('config/browsers.yml')["browsers"]
 
     def self.get
-      browser = Hermes.configuration.user_agent
-      return BROWSERS["user_agents"][browser]
+      browsers = YAML.load_file("#{Hermes.root}/config/browsers.yml")["browsers"]
+      return browsers["user_agents"][Hermes.configuration.user_agent]
     end
 
     def self.get_mechanize
-      browser = Hermes.configuration.user_agent
-      return BROWSERS["user_agents_mechanize"][browser]
+      browsers = YAML.load_file("#{Hermes.root}/config/browsers.yml")["browsers"]
+      return browsers["user_agents_mechanize"][Hermes.configuration.user_agent]
     end
 
   end
