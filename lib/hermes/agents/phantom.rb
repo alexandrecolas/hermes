@@ -5,10 +5,8 @@ module Hermes
     class Phantom
       include Capybara::DSL
 
-      def initialize(proxy: false)
+      def initialize(proxy: false, options: {})
         @path = Dir.pwd
-
-        options = { timeout: 120, :cookies => true }
 
         if proxy
           options[:phantomjs_options] = [
@@ -17,9 +15,11 @@ module Hermes
             "--load-images=no",
             "--ignore-ssl-errors=yes"
           ]
-          options[:js_errors] = false
-          options[:logger] = nil
-          options[:phantomjs_logger] = File.open("#{@path}/log/phantomjs.log", "w")
+        else
+          options[:phantomjs_options] = [
+            "--load-images=no",
+            "--ignore-ssl-errors=yes"
+          ]
         end
 
         Capybara.configure do |config|

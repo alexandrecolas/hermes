@@ -14,8 +14,8 @@ module Hermes
       @proxy = Hermes::Proxy.new(address: address, port: port, type: type)
     end
 
-    def phantom
-      return @agent_phantom ||= Hermes::Agents::Phantom.new(proxy: @proxy)
+    def phantom(options: {})
+      return @agent_phantom ||= Hermes::Agents::Phantom.new(proxy: @proxy, options: options)
     end
 
     def mechanize
